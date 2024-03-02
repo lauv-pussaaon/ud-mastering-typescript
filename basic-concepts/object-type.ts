@@ -95,12 +95,12 @@ type Cat = {
     numLives: number;
 };
 
-type Dog = {
+type Dogie = {
     breed: string;
 };
 
 type CatDog = Cat &
-    Dog & {
+    Dogie & {
         age: number;
     };
 
