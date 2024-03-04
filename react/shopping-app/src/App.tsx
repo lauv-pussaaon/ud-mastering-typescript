@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Item from "./models/item";
+import { v4 as getId } from "uuid";
+import ShoppingList from "./components/ShoppingList";
+import ShoppingForm from "./components/ShoppingForm";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [items, setItems] = useState<Item[]>([]);
+
+    const addItem = (product: string, quantity: number) => {
+        const newItem = {
+            id: getId(),
+            product,
+            quantity: 1,
+        };
+        setItems((items) => [...items, newItem]);
+    };
+
+    return (
+        <div className="App">
+            <ShoppingList items={items} />
+            <ShoppingForm onAddItem={addItem} />
+        </div>
+    );
 }
 
 export default App;
